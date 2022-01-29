@@ -1,0 +1,20 @@
+[debug] [zinc] IncrementalCompile -----------
+[debug] IncrementalCompile.incrementalCompile
+[debug] previous = Stamps for: 0 products, 0 sources, 0 libraries
+[debug] current source = Set(${BASE}/src/main/scala/SetTheoryDSL.scala)
+[debug] > initialChanges = InitialChanges(Changes(added = Set(${BASE}/src/main/scala/SetTheoryDSL.scala), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] Full compilation, no sources in previous analysis.
+[debug] all 1 sources are invalidated
+[debug] Initial set of included nodes: 
+[debug] Recompiling all sources: number of invalidated sources > 50.0% of all sources
+[debug] compilation cycle 1
+[info] compiling 1 Scala source to C:\Users\Mora\IdeaProjects\474_HW1_SBT\target\scala-3.1.0\classes ...
+[debug] Returning already retrieved and compiled bridge: C:\Users\Mora\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-sbt-bridge\3.1.0\scala3-sbt-bridge-3.1.0.jar.
+[debug] [zinc] Running cached compiler 5a2fc122 for Scala Compiler version 3.1.0
+[debug] [zinc] The Scala compiler is invoked with:
+[debug] 	-bootclasspath
+[debug] 	C:\Program Files\Java\jdk1.8.0_311\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_311\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_311\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_311\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_311\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_311\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_311\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_311\jre\classes;C:\Users\Mora\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.1.0\scala3-library_3-3.1.0.jar;C:\Users\Mora\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.6\scala-library-2.13.6.jar
+[debug] 	-classpath
+[debug] 	C:\Users\Mora\IdeaProjects\474_HW1_SBT\target\scala-3.1.0\classes
+[debug] Scala compilation took 2.7333327 s
+[info] done compiling
