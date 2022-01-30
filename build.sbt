@@ -6,3 +6,8 @@ lazy val root = (project in file("."))
   .settings(
     name := "474_HW1_SBT"
   )
+
+val scalaticVersion = "3.2.9"
+
+libraryDependencies += "org.scalatest" %% "scalatest" % scalaticVersion % Test
+libraryDependencies += "org.scalatest" %% "scalatest-featurespec" % scalaticVersion % Test

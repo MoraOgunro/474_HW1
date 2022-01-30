@@ -84,10 +84,14 @@ object SetTheoryDSL:
           Assign
           Locates a set within variableBinding according to the variable name passed
           or creates one if it does not exist.
+          USER CANNOT ENTER A VALUE SUCH AS STRiNG, IT MUST BE DECLARED AS A VARIABLE NAME
 
           Add the input element to the set
         */
         case Assign(name, input) => {
+          if(!name.isInstanceOf[Variable]){
+            throw new IllegalArgumentException
+          }
           val variableInfo = name.eval.asInstanceOf[Tuple2[String,BasicType]]
           if((scopeMap(currentScopeName(0))).asInstanceOf[mutable.Map[String,Any]].contains(variableInfo._1)){
             println(s"Found Set with key ${variableInfo._1}")
@@ -176,14 +180,17 @@ object SetTheoryDSL:
           }
         }
         case NoneCase() =>{
+          println("None Case Found")
           return None
         }
 
       }
 
 @main def runSetExp(): Unit =
-  // The variable names must be wrapped in Value()
+  println("***Welcome to my Set Theory DSL!***")
+  // Place your expressions here. View README.md for syntax documentation
   println(Scope("default", Macro("mac1")).eval)
+  ()
 
 
 
