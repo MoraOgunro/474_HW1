@@ -140,18 +140,19 @@ object SetTheoryDSL:
           }
           println(s"Object inserted. The set now contains: ${scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]}")
 
-        /** Creates a person with a given name and birthdate
+        /** Deletes an object from a set
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param name the variable name of the set
+         *  param input the object to be deleted
+         *  return nothing
          */
         case Delete(name, input) =>
+          /** retrieve the tuple returned by Variable() */
           val variableInfo = name.eval.asInstanceOf[(String, BasicType)]
+          /** if the requested scope exists and it contains the specified set */
           if( classOf[mutable.Map[String,Any]].isInstance(scopeMap(currentScopeName(0)))
             && scopeMap(currentScopeName(0)).asInstanceOf[mutable.Map[String,Any]].contains(variableInfo._1)){
-            println(s"Deleting Set ${variableInfo._1}")
+            println(s"Deleting from set ${variableInfo._1}")
             // This is necessary because the user might use a variable or a value.
             // The evaluation of a variable outputs a tuple of objects, but evaluations of Values outputs a singe object
             try {
