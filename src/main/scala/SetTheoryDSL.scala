@@ -155,12 +155,13 @@ object SetTheoryDSL:
             println(s"Deleting from set ${variableInfo._1}")
             // This is necessary because the user might use a variable or a value.
             // The evaluation of a variable outputs a tuple of objects, but evaluations of Values outputs a singe object
+            val scope = scopeMap(currentScopeName(0)).asInstanceOf[mutable.Map[String,Any]]
             try {
-              scopeMap(currentScopeName(0)).asInstanceOf[mutable.Map[String,Any]](variableInfo._1).asInstanceOf[mutable.Set[BasicType]] -= input.eval.asInstanceOf[(String, BasicType)]._2
+              scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]] -= input.eval.asInstanceOf[(String, BasicType)]._2
             }
             catch {
               case e: _ =>
-                scopeMap(currentScopeName(0)).asInstanceOf[mutable.Map[String,Any]](variableInfo._1).asInstanceOf[mutable.Set[BasicType]]  -= input.eval
+                scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]  -= input.eval
             }
           }else{
             scopeMap(currentScopeName(0)).asInstanceOf[mutable.Map[String,Any]](variableInfo._1) = mutable.Set[BasicType]()
@@ -175,10 +176,9 @@ object SetTheoryDSL:
          */
         case Union(set1, set2) =>
           /** retrieve the two sets from their variable bindings */
-          val f = set1.eval.asInstanceOf[(String, BasicType)]._2
-          val s = set2.eval.asInstanceOf[(String, BasicType)]._2
+          val sets = (set1.eval.asInstanceOf[(String, BasicType)]._2, set2.eval.asInstanceOf[(String, BasicType)]._2)
           /** set1 and set2 must be recognized as type Set */
-          f.asInstanceOf[mutable.Set[BasicType]] union s.asInstanceOf[mutable.Set[BasicType]]
+          sets._1.asInstanceOf[mutable.Set[BasicType]] union sets._2.asInstanceOf[mutable.Set[BasicType]]
 
         /** The intersection of two sets
          *
@@ -188,8 +188,9 @@ object SetTheoryDSL:
          */
         case Intersection(set1, set2) =>
           /** retrieve the two sets from their variable bindings */
-          val f = set1.eval.asInstanceOf[(String, BasicType)]._2
-          val s = set2.eval.asInstanceOf[(String, BasicType)]._2
+          val sets = (set1.eval.asInstanceOf[(String, BasicType)]._2, set2.eval.asInstanceOf[(String, BasicType)]._2)
+          val f = sets._1
+          val s = sets._2
           /** set1 and set2 must be recognized as type Set */
           f.asInstanceOf[mutable.Set[BasicType]] intersect s.asInstanceOf[mutable.Set[BasicType]]
 
@@ -251,7 +252,9 @@ object SetTheoryDSL:
             println(s"Scope ${currentScopeName(0)} does not exist, creating it now...")
             scopeMap(currentScopeName(0)) = mutable.Map[String,Any]()
           }
+          println(s"Evaluations beginning. The current scope looks like:\n${scopeMap(currentScopeName(0))}")
           expression.eval
+          println(s"Evaluations finished. The current scope now looks like:\n${scopeMap(currentScopeName(0))}")
 
         /** Creates a macro binding with a given name and expression
          *
@@ -261,8 +264,10 @@ object SetTheoryDSL:
          */
         case Macro(name, exp: SetExp) =>
           if(exp.eval != None){
-            // Then Add this macro to the macro bindings
+            // Then Add this macro to the macro
+            println(s"Adding expression to macro bindings.")
             macroBindings(name) = exp
+            println(s"Macro bindings now looks like: $macroBindings")
           }else{
             //Run this macro
             macroBindings(name).eval
@@ -273,15 +278,14 @@ object SetTheoryDSL:
          *  return None
          */
         case NoneCase() =>
-          println("None Case Found")
           None
 
     }
 
 @main def runSetExp(): Unit =
-  println("***Welcome to my Set Theory DSL!***")
+  println("***Welcome to my Set Theory DSL!***\n")
   // Place your expressions here. View README.md for syntax documentation
-  println(Scope("yoyo", Assign(Variable(Value("burger")), Value(10))).eval)
+
   ()
 
 
