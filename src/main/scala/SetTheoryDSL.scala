@@ -167,63 +167,68 @@ object SetTheoryDSL:
             println(s"Did Not Find Set with key ${variableInfo._1}. Nothing was deleted.")
           }
 
-        /** Creates a person with a given name and birthdate
+        /** The union of two sets
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param set1 a set
+         *  param set2 a set
+         *  return the union of set1 and set2 as type mutable.Set
          */
         case Union(set1, set2) =>
+          /** retrieve the two sets from their variable bindings */
           val f = set1.eval.asInstanceOf[(String, BasicType)]._2
           val s = set2.eval.asInstanceOf[(String, BasicType)]._2
+          /** set1 and set2 must be recognized as type Set */
           f.asInstanceOf[mutable.Set[BasicType]] union s.asInstanceOf[mutable.Set[BasicType]]
 
-        /** Creates a person with a given name and birthdate
+        /** The intersection of two sets
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param set1 a set
+         *  param set2 a set
+         *  return the intersection of set1 and set2 as type mutable.Set
          */
         case Intersection(set1, set2) =>
+          /** retrieve the two sets from their variable bindings */
           val f = set1.eval.asInstanceOf[(String, BasicType)]._2
           val s = set2.eval.asInstanceOf[(String, BasicType)]._2
+          /** set1 and set2 must be recognized as type Set */
           f.asInstanceOf[mutable.Set[BasicType]] intersect s.asInstanceOf[mutable.Set[BasicType]]
 
-        /** Creates a person with a given name and birthdate
+        /** The set difference of two sets
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param set1 a set
+         *  param set2 a set
+         *  return the difference of set1 and set2 as type mutable.Set
          */
         case SetDifference(set1, set2) =>
+          /** retrieve the two sets from their variable bindings */
           val f = set1.eval.asInstanceOf[(String, BasicType)]._2
           val s = set2.eval.asInstanceOf[(String, BasicType)]._2
+          /** set1 and set2 must be recognized as type Set */
           f.asInstanceOf[mutable.Set[BasicType]] diff s.asInstanceOf[mutable.Set[BasicType]]
 
-        /** Creates a person with a given name and birthdate
+        /** The symmetric difference of two sets
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param set1 a set
+         *  param set2 a set
+         *  return the symmetric of set1 and set2 as type mutable.Set
          */
         case SymmetricDifference(set1, set2) =>
+          /** set1 and set2 must be recognized as type Set */
+          /** Symmetric difference is the difference between the union and intersection */
           Union(set1, set2).eval.asInstanceOf[mutable.Set[BasicType]] diff Intersection(set1, set2).eval.asInstanceOf[mutable.Set[BasicType]]
 
-        /** Creates a person with a given name and birthdate
+        /** The cartesian product of two sets
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param set1 a set
+         *  param set2 a set
+         *  return the cartesian product of set1 and set2 as type mutable.Set
          */
         case Cartesian(set1,set2) =>
+          /** retrieve the two sets from their variable bindings */
           val f = set1.eval.asInstanceOf[(String, BasicType)]._2.asInstanceOf[mutable.Set[BasicType]]
           val s = set2.eval.asInstanceOf[(String, BasicType)]._2.asInstanceOf[mutable.Set[BasicType]]
           val cartesian = mutable.Set[BasicType]()
+          /** n squared loop through f and s */
           f.foreach(f_elem => {
             s.foreach(s_elem =>{
               cartesian.addOne((f_elem,s_elem))
@@ -232,27 +237,27 @@ object SetTheoryDSL:
 
           cartesian
 
-        /** Creates a person with a given name and birthdate
+        /** Sets the current scope and creates on if it does not exist
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param scopeName the variable name of the scope
+         *  param expression the SetExp to be evaluated within scope
+         *  return the evaluated expression
          */
         case Scope(scopeName, expression) =>
+          /** set currentScopeName to scopeName */
           currentScopeName(0) = scopeName
+          /** if the scope does not exist, create it */
           if( !(scopeMap contains currentScopeName(0)) ){
             println(s"Scope ${currentScopeName(0)} does not exist, creating it now...")
             scopeMap(currentScopeName(0)) = mutable.Map[String,Any]()
           }
           expression.eval
 
-        /** Creates a person with a given name and birthdate
+        /** Creates a macro binding with a given name and expression
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  param name the variable name of the macro
+         *  param exp the expression to be saved as a macro
+         *  return nothing
          */
         case Macro(name, exp: SetExp) =>
           if(exp.eval != None){
