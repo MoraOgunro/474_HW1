@@ -268,12 +268,9 @@ object SetTheoryDSL:
             macroBindings(name).eval
           }
 
-        /** Creates a person with a given name and birthdate
+        /** NoneCase case used by various expressions
          *
-         *  param name their name
-         *  param birthDate the person's birthdate
-         *  return a new Person instance with the age determined by the
-         *          birthdate and current date.
+         *  return None
          */
         case NoneCase() =>
           println("None Case Found")
