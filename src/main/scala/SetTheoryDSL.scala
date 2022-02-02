@@ -6,17 +6,18 @@ import scala.collection.mutable.{Map, Set}
 
 /** SetTheoryDSL provides a set theory language for the user to perform actions on sets */
 object SetTheoryDSL:
-  type BasicType = Any
-  /** variableBinding is the default scope. */
-  val variableBinding: mutable.Map[String, Any] = mutable.Map[String,Any]("Set1" -> mutable.Set(1,2,3), "Set2" -> mutable.Set(3,4,5), "testVar" -> 100)
   /** TODO: REMOVE */
-  val binding2: mutable.Map[String, Any] = mutable.Map[String,Any]("otherSet" -> mutable.Set("dog","cat"), "testVar" -> 50)
+  val variableBinding: mutable.Map[String, Any] = mutable.Map[String,Any]()
+  /** variableBinding is the default scope. */
+  //val variableBinding: mutable.Map[String, Any] = mutable.Map[String,Any]("Set1" -> mutable.Set(1,2,3), "Set2" -> mutable.Set(3,4,5), "testVar" -> 100)
+  type BasicType = Any
+  // val binding2: mutable.Map[String, Any] = mutable.Map[String,Any]("otherSet" -> mutable.Set("dog","cat"), "testVar" -> 50)
   /** scopeMap is a collection of variable scopes*/
-  val scopeMap: mutable.Map[String, Any] = mutable.Map[String,Any]("default" -> variableBinding, "newScope" -> binding2)
+  val scopeMap: mutable.Map[String, Any] = mutable.Map[String,Any]("default" -> variableBinding)
   /** the scope that is currently active */
   val currentScopeName: Array[String] = Array("default")
   /** a map of user-defined macro commands */
-  val macroBindings: mutable.Map[String, SetExp] = mutable.Map[String, SetExp]("mac1" -> Delete(Variable(Value("Set1")), Value(1)))
+  val macroBindings: mutable.Map[String, SetExp] = mutable.Map[String, SetExp]()
 
 
   enum SetExp:
@@ -45,13 +46,13 @@ object SetTheoryDSL:
 
         /** Retrieves the value associated with a variable name from the scopeMap
          *
-         *  param name the variable name
+         *  param expr the Value expression holding the variable name
          *  return a tuple containing the variable name and its value. The value will be None if
          *    the variable does not exist.
          */
-        case Variable(name) =>
+        case Variable(expr) =>
           /** name is of type SetExp, it must be converted into a string */
-          val n = name.eval.asInstanceOf[String]
+          val n = expr.eval.asInstanceOf[String]
           try {
             /** using currentScopeName to retrieve the appropriate variable bindings
              * scopeMap returns a map of variables, which is used to find the value of variable n
@@ -253,8 +254,9 @@ object SetTheoryDSL:
             scopeMap(currentScopeName(0)) = mutable.Map[String,Any]()
           }
           println(s"Evaluations beginning. The current scope looks like:\n${scopeMap(currentScopeName(0))}")
-          expression.eval
-          println(s"Evaluations finished. The current scope now looks like:\n${scopeMap(currentScopeName(0))}")
+          val result = expression.eval
+          println(s"Evaluations finished. The current scope now looks like:\n${scopeMap(currentScopeName(0))}\n")
+          result
 
         /** Creates a macro binding with a given name and expression
          *
@@ -285,8 +287,8 @@ object SetTheoryDSL:
 @main def runSetExp(): Unit =
   println("***Welcome to my Set Theory DSL!***\n")
   // Place your expressions here. View README.md for syntax documentation
-
-  ()
+  val a = Scope("default", Value(Int.MinValue)).eval
+  println( a )
 
 
 

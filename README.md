@@ -18,22 +18,46 @@ See the **SYNTAX** section below for descriptions of each procedure and how to u
 In the sbt shell, run the command "test"
 
 # Syntax
-**Value(input: BasicType)** \
-**Variable(name: SetExp)** \
-**Check(name: SetExp, input: SetExp)** \
-**Assign(name: SetExp, input: SetExp)** \
-**Union(set1:SetExp, set2:SetExp)** \
-**Intersection(set1:SetExp, set2:SetExp)** \
-**SetDifference(set1:SetExp, set2:SetExp)** \
-**SymmetricDifference(set1:SetExp, set2:SetExp)** \
-**Cartesian(set1:SetExp, set2:SetExp)** \
-**Scope(scopeName: String, expression: SetExp)** \
-**Macro(name: String, input: SetExp = NoneCase())** \
-**Delete(name: SetExp, input: SetExp)** \
+All expressions must be wrapped in a Scope. \
+For example, 
+```
+Scope("default", SetExp)
+```
+See the Syntax for Scope for a more detailed example.
+
+**Scope(scopeName: String, expression: SetExp)** 
+```
+Scope("default", Union(Variable(Value("setName"))), Variable(Value("setName")))).eval
+```
+The above command shows how to properly wrap your expression inside a scope. "default" is the name of your desired scope.
+Scope will print the variable bindings of the specified scope before and after  each evaluation.
+
+**Value(input: BasicType)** 
+```
+Value(5).eval
+```
+Will return 5.
+
+**Variable(expr: SetExp)** 
+```
+Variable(Value("myVariableName"))).eval
+```
+Variables must contain a Value expression which holds the variable name.
+
+**Check(name: SetExp, input: SetExp)** 
+```
+Check(Variable(Value("firstSet")), Value(5)).eval
+```
+**Assign(name: SetExp, input: SetExp)** 
+```
+Assign(Variable(Value("testSet")), Value(5))
+```
+**Union(set1:SetExp, set2:SetExp)** 
+**Intersection(set1:SetExp, set2:SetExp)** 
+**SetDifference(set1:SetExp, set2:SetExp)** 
+**SymmetricDifference(set1:SetExp, set2:SetExp)** 
+**Cartesian(set1:SetExp, set2:SetExp)** 
+**Macro(name: String, input: SetExp = NoneCase())** 
+**Delete(name: SetExp, input: SetExp)** 
 **NoneCase()** \
 Used by the language.
-
-# Troubleshooting
-If sbt cannot create a local server, close sbt shell and intelliJ if it is open. Then reopen sbt shell and run the "compile" command. \
-The sbt shell in IntelliJ will sometimes conflict with the sbt shell in your personal terminal.
-
