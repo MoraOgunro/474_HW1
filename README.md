@@ -38,26 +38,55 @@ Value(5).eval
 ```
 Will return 5.
 
-**Variable(expr: SetExp)** 
+**Variable(expr: SetExp)**
+
+Variables must contain a Value expression which holds the variable name.
 ```
 Variable(Value("myVariableName"))).eval
 ```
-Variables must contain a Value expression which holds the variable name.
 
-**Check(name: SetExp, input: SetExp)** 
+**Check(name: SetExp, input: SetExp)**
 ```
 Check(Variable(Value("firstSet")), Value(5)).eval
 ```
-**Assign(name: SetExp, input: SetExp)** 
+**Assign(name: SetExp, input: SetExp)**
 ```
-Assign(Variable(Value("testSet")), Value(5))
+Assign(Variable(Value("testSet")), Value(5)).eval
 ```
-**Union(set1:SetExp, set2:SetExp)** 
-**Intersection(set1:SetExp, set2:SetExp)** 
-**SetDifference(set1:SetExp, set2:SetExp)** 
-**SymmetricDifference(set1:SetExp, set2:SetExp)** 
-**Cartesian(set1:SetExp, set2:SetExp)** 
-**Macro(name: String, input: SetExp = NoneCase())** 
-**Delete(name: SetExp, input: SetExp)** 
-**NoneCase()** \
+**Delete(name: SetExp, input: SetExp)**
+```
+Delete(Variable(Value("firstSet")), Value(5)).eval
+```
+**Union(set1:SetExp, set2:SetExp)**
+```
+Union(Variable(Value("firstSet")), Variable(Value("secondSet"))).eval
+```
+**Intersection(set1:SetExp, set2:SetExp)**
+```
+Intersection(Variable(Value("firstSet")), Variable(Value("secondSet")))).eval
+```
+**SetDifference(set1:SetExp, set2:SetExp)**
+```
+SetDifference(Variable(Value("firstSet")), Variable(Value("secondSet")))).eval
+```
+**SymmetricDifference(set1:SetExp, set2:SetExp)**
+```
+SymmetricDifference(Variable(Value("firstSet")), Variable(Value("secondSet")))).eval
+```
+**Cartesian(set1:SetExp, set2:SetExp)**
+```
+Cartesian(Variable(Value("firstSet")), Variable(Value("secondSet")))).eval
+```
+**Macro(name: String, input: SetExp = NoneCase())**
+
+To create a macro
+```
+Macro("myMacro", Delete(Variable(Value("firstSet")), Value(1))).eval
+```
+To use the macro
+
+```Macro("myMacro").eval```
+
+**NoneCase()** 
+
 Used by the language.

@@ -31,7 +31,7 @@ class SetTheoryDSLTest extends AnyFlatSpec with Matchers with BeforeAndAfter {
   }
   it should "throw IllegalArgumentException if the first parameter is not a variable object" in {
     a[IllegalArgumentException] should be thrownBy {
-      Scope("default", Assign(Value("testSet"), Value(10))).eval
+      Assign(Value("testSet"), Value(10)).eval
     }
   }
   "Delete" should "remove an element from a set" in {
@@ -61,7 +61,7 @@ class SetTheoryDSLTest extends AnyFlatSpec with Matchers with BeforeAndAfter {
   "Cartesian" should "return the Cartesian of two sets" in {
     assert( Scope("default", Cartesian(Variable(Value("firstSet")), Variable(Value("secondSet")))).eval === mutable.Set((1,6), (2,5), (5,7), (5,5), (2,6), (5,6), (2,7), (1,7), (1,5)))
   }
-  "Macro" should "Create a macro" in {
+  "Macro" should "Create and use a macro" in {
     Macro("myMacro", Delete(Variable(Value("firstSet")), Value(1))).eval
     Scope("default", Macro("myMacro")).eval
     val result: (String,Any) = Scope("default", Variable(Value("firstSet"))).eval.asInstanceOf[(String,Any)]

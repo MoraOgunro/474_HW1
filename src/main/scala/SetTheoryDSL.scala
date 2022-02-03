@@ -109,7 +109,7 @@ object SetTheoryDSL:
          *  return nothing.
          */
         case Assign(name, input) =>
-          /** the user must call Assign on a variable, not a string literal */
+          /** the user must call Assign on a variable, not a string */
           if(!name.isInstanceOf[Variable]){
             println("Assign must be called on a Variable name, not a string literal.\n" +
               "Try using Assign(Variable(Value(variableName))).\nRemember that the variable does not have to exist, as Assign will create one for you." +
@@ -128,16 +128,13 @@ object SetTheoryDSL:
             println(s"Did Not Find Set with key ${variableInfo._1}. New Set Created")
           }
 
-          /**
-           * The evaluation of a variable outputs a tuple of objects, but evaluations of Values outputs a singe object
-           * both cases need to eb accounted for.
-           * */
-          try {
-            scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]] += input.eval.asInstanceOf[(String, BasicType)]._2
-          }
-          catch {
-            case e: _ =>
-              scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]  += input.eval
+          val result = input.eval
+          if( classOf[mutable.HashSet[BasicType]].isInstance(result)){  /** if the input is a set */
+            scope(variableInfo._1) = scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]] union result.asInstanceOf[mutable.Set[BasicType]]
+          }else if (classOf[(String,BasicType)].isInstance(result)){ /** input is a variable */
+            scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]] += result.asInstanceOf[(String, BasicType)]._2
+          }else{ /** input is a value */
+            scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]  += result
           }
           println(s"Object inserted. The set now contains: ${scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]}")
 
@@ -253,10 +250,14 @@ object SetTheoryDSL:
             println(s"Scope ${currentScopeName(0)} does not exist, creating it now...")
             scopeMap(currentScopeName(0)) = mutable.Map[String,Any]()
           }
-          println(s"Evaluations beginning. The current scope looks like:\n${scopeMap(currentScopeName(0))}")
-          val result = expression.eval
-          println(s"Evaluations finished. The current scope now looks like:\n${scopeMap(currentScopeName(0))}\n")
-          result
+          try {
+            val result = expression.eval
+            println(s"\nEvaluations finished. The current scope now looks like:\n${scopeMap(currentScopeName(0))}\n")
+            result
+          }catch {
+            case e: _ =>
+              println("\nError. Please check your syntax.\n")
+          }
 
         /** Creates a macro binding with a given name and expression
          *
@@ -287,11 +288,9 @@ object SetTheoryDSL:
 @main def runSetExp(): Unit =
   println("***Welcome to my Set Theory DSL!***\n")
   // Place your expressions here. View README.md for syntax documentation
-  Scope("default", Assign(Variable(Value("firstSet")), Value(1,2,5))).eval
-  val a = Delete(Variable(Value("firstSet")), Value(5)).eval
-  println( a )
-
-
+  Scope("default", Assign(Variable(Value("firstSet")), Value(1))).eval
+  Scope("default", Assign(Variable(Value("secondSet")), Value(5))).eval
+  Scope("default", Assign(Variable(Value("dog")), Union(Variable(Value("secondSet")), Variable(Value("firstSet"))))).eval
 
 
 
