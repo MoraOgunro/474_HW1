@@ -6,19 +6,15 @@ import scala.collection.mutable.{Map, Set}
 
 /** SetTheoryDSL provides a set theory language for the user to perform actions on sets */
 object SetTheoryDSL:
-  /** TODO: REMOVE */
-  val variableBinding: mutable.Map[String, Any] = mutable.Map[String,Any]()
-  /** variableBinding is the default scope. */
-  //val variableBinding: mutable.Map[String, Any] = mutable.Map[String,Any]("Set1" -> mutable.Set(1,2,3), "Set2" -> mutable.Set(3,4,5), "testVar" -> 100)
   type BasicType = Any
-  // val binding2: mutable.Map[String, Any] = mutable.Map[String,Any]("otherSet" -> mutable.Set("dog","cat"), "testVar" -> 50)
+  /** variableBinding is the default scope. */
+  val variableBinding: mutable.Map[String, Any] = mutable.Map[String,Any]()
   /** scopeMap is a collection of variable scopes*/
   val scopeMap: mutable.Map[String, Any] = mutable.Map[String,Any]("default" -> variableBinding)
   /** the scope that is currently active */
   val currentScopeName: Array[String] = Array("default")
   /** a map of user-defined macro commands */
   val macroBindings: mutable.Map[String, SetExp] = mutable.Map[String, SetExp]()
-
 
   enum SetExp:
     case Value(input: BasicType)
@@ -36,12 +32,11 @@ object SetTheoryDSL:
     case NoneCase()
     def eval: BasicType =
     this match {
-
-      /** Returns the value that was passed into it
-       *
-       *  param i a primitive value
-       *  return the value that was passed into it
-       */
+        /** Returns the value that was passed into it
+         *
+         *  param i a primitive value
+         *  return the value that was passed into it
+         */
         case Value(i) => i
 
         /** Retrieves the value associated with a variable name from the scopeMap
