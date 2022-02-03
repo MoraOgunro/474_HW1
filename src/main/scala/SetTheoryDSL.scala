@@ -287,7 +287,8 @@ object SetTheoryDSL:
 @main def runSetExp(): Unit =
   println("***Welcome to my Set Theory DSL!***\n")
   // Place your expressions here. View README.md for syntax documentation
-  val a = Scope("default", Value(Int.MinValue)).eval
+  Scope("default", Assign(Variable(Value("firstSet")), Value(1,2,5))).eval
+  val a = Delete(Variable(Value("firstSet")), Value(5)).eval
   println( a )
 
 
