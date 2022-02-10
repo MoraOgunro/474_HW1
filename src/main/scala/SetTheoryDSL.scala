@@ -124,11 +124,14 @@ object SetTheoryDSL:
           }
 
           val result = input.eval
-          if( classOf[mutable.HashSet[BasicType]].isInstance(result)){  /** if the input is a set */
+          if( classOf[mutable.HashSet[BasicType]].isInstance(result)){
+            /** if the input is a set */
             scope(variableInfo._1) = scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]] union result.asInstanceOf[mutable.Set[BasicType]]
-          }else if (classOf[(String,BasicType)].isInstance(result)){ /** input is a variable */
+          }else if (classOf[(String,BasicType)].isInstance(result)){
+            /** if the input is a variable */
             scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]] += result.asInstanceOf[(String, BasicType)]._2
-          }else{ /** input is a value */
+          }else{
+            /** if the input is a value */
             scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]  += result
           }
           println(s"Object inserted. The set now contains: ${scope(variableInfo._1).asInstanceOf[mutable.Set[BasicType]]}")
@@ -281,11 +284,9 @@ object SetTheoryDSL:
     }
 
 @main def runSetExp(): Unit =
-  println("***Welcome to my Set Theory DSL!***\n")
+  println("***Welcome to my Set Theory DSL!***")
+  println("***Please insert your expressions in the main function***\n")
   // Place your expressions here. View README.md for syntax documentation
-  Scope("default", Assign(Variable(Value("firstSet")), Value(1))).eval
-  Scope("default", Assign(Variable(Value("secondSet")), Value(5))).eval
-  Scope("default", Assign(Variable(Value("dog")), Union(Variable(Value("secondSet")), Variable(Value("firstSet"))))).eval
 
 
 

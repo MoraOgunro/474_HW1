@@ -1,0 +1,9 @@
+Limitations:
+
+1. The user must specify their desired scope with each expression.
+This language cannot determine the scope intelligently. The user must specify which scope they want to operate on with each expression. This creates room for errors and creates extra code.
+2. When using Variable(), the user must wrap their variable name in a Value() case.
+Instead of being able to type Variable("variableName"), the user must type Variable(Value("variableName")). This is because Variable is expecting a SetExp as its input and not a string.
+This adds extra code.
+3. Assign() can only insert one object at a time.
+The user must invoke Assign multiple times if they want to insert many objects at once. This becomes fatiguing if there are many objects to insert.

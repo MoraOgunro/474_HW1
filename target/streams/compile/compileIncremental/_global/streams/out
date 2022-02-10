@@ -2,39 +2,5 @@
 [0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
 [0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 33 products, 1 sources, 2 libraries[0m
 [0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/SetTheoryDSL.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/SetTheoryDSL.scala), unmodified = ...),Set(${BASE}/target/scala-3.1.0/classes/SetTheoryDSL$package$.class, ${BASE}/target/scala-3.1.0/classes/SetTheoryDSL$package.class, ${BASE}/target/scala-3.1.0/classes/SetTheoryDSL.class, ${BASE}/target/scala-3.1.0/classes/runSetExp.class),Set(),API Changes: Set())[0m
-[0m[[0m[0mdebug[0m] [0m[0m[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial source changes:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	removed: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(${BASE}/src/main/scala/SetTheoryDSL.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set(${BASE}/target/scala-3.1.0/classes/SetTheoryDSL$package$.class, ${BASE}/target/scala-3.1.0/classes/SetTheoryDSL$package.class, ${BASE}/target/scala-3.1.0/classes/SetTheoryDSL.class, ${BASE}/target/scala-3.1.0/classes/runSetExp.class)[0m
-[0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(runSetExp, SetTheoryDSL$.SetExp$.Scope, SetTheoryDSL$.SetExp$.NoneCase, SetTheoryDSL$.SetExp$.Variable, SetTheoryDSL$.SetExp$.SetDifference, SetTheoryDSL$.SetExp$.Assign, SetTheoryDSL, SetTheoryDSL$.SetExp, SetTheoryDSL$.SetExp$.Value, SetTheoryDSL$.SetExp$.Delete, SetTheoryDSL$package, SetTheoryDSL$.SetExp$.Check, SetTheoryDSL$.SetExp$.SymmetricDifference, SetTheoryDSL$.SetExp$.Cartesian, SetTheoryDSL$.SetExp$.Union, SetTheoryDSL$.SetExp$.Macro, SetTheoryDSL$.SetExp$.Intersection)[0m
-[0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	product: Set(${BASE}/src/main/scala/SetTheoryDSL.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mall 1 sources are invalidated[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: runSetExp, SetTheoryDSL$.SetExp$.Scope, SetTheoryDSL$.SetExp$.NoneCase, SetTheoryDSL$.SetExp$.Variable, SetTheoryDSL$.SetExp$.SetDifference, SetTheoryDSL$.SetExp$.Assign, SetTheoryDSL, SetTheoryDSL$.SetExp, SetTheoryDSL$.SetExp$.Value, SetTheoryDSL$.SetExp$.Delete, SetTheoryDSL$package, SetTheoryDSL$.SetExp$.Check, SetTheoryDSL$.SetExp$.SymmetricDifference, SetTheoryDSL$.SetExp$.Cartesian, SetTheoryDSL$.SetExp$.Union, SetTheoryDSL$.SetExp$.Macro, SetTheoryDSL$.SetExp$.Intersection[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Value by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Delete by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Check by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.SymmetricDifference by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Cartesian by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Union by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Macro by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding SetTheoryDSL$.SetExp$.Intersection by SetTheoryDSL$.SetExp[0m
-[0m[[0m[0mdebug[0m] [0m[0mRecompiling all sources: number of invalidated sources > 50.0% of all sources[0m
-[0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
-[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to C:\Users\Mora\IdeaProjects\474_HW1_SBT\target\scala-3.1.0\classes ...[0m
-[0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: C:\Users\Mora\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-sbt-bridge\3.1.0\scala3-sbt-bridge-3.1.0.jar.[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 743c7ddb for Scala Compiler version 3.1.0[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
-[0m[[0m[0mdebug[0m] [0m[0m	C:\Program Files\Java\jre1.8.0_311\lib\resources.jar;C:\Program Files\Java\jre1.8.0_311\lib\rt.jar;C:\Program Files\Java\jre1.8.0_311\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_311\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_311\lib\jce.jar;C:\Program Files\Java\jre1.8.0_311\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_311\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_311\classes;C:\Users\Mora\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala3-library_3\3.1.0\scala3-library_3-3.1.0.jar;C:\Users\Mora\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.6\scala-library-2.13.6.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
-[0m[[0m[0mdebug[0m] [0m[0m	C:\Users\Mora\IdeaProjects\474_HW1_SBT\target\scala-3.1.0\classes[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.240059 s[0m
-[0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())[0m
+[0m[[0m[0mdebug[0m] [0m[0mNo changes[0m
